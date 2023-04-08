@@ -4,9 +4,9 @@ import sqlite3
 import string
 
 #Env variables
-channel_name = os.environ("CHANNEL_NAME")
-tracked_phrases = os.environ("PHRASE")
-discord_api_token = os.environ("DISCORD_TOKEN")
+channel_name = os.environ.get('CHANNEL_NAME')
+tracked_phrases = os.environ.get('PHRASE')
+discord_api_token = os.environ.get('DISCORD_TOKEN')
 
 
 #discord intents
@@ -48,22 +48,22 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-
     if channel == channel_name:
         if phrase_name is not None:
             conn = sqlite3.connect('/data/count_data.db')
             c = conn.cursor()
             server_id = str(message.guild.id)
             channel = str(message.channel.id)
-            name = phrase_name.split(' ', 1)[1]
-            capital_name = string.capwords(name)
-            c.execute('''SELECT phrase_count FROM count_data
+            if phrase_name.startswith("fuck ") and len(phrase_name.split()) > 1:
+                name = phrase_name.split(' ', 1)[1]
+                capital_name = string.capwords(name)
+                c.execute('''SELECT phrase_count FROM count_data
                           WHERE server_id = ? AND phrase_name = ? AND name = ?''', (server_id, phrase_name, name))
             result = c.fetchone()
             if result is None:
-                phrase_count = 1
-                c.execute('''INSERT INTO count_data (server_id, phrase_name, name, phrase_count)
-                              VALUES (?, ?, ?, ?)''', (server_id, phrase_name, name, phrase_count))
+                    phrase_count = 1
+                    c.execute('''INSERT INTO count_data (server_id, phrase_name, name, phrase_count)
+                            VALUES (?, ?, ?, ?)''', (server_id, phrase_name, name, phrase_count))
             else:
                 phrase_count = result[0] + 1
                 c.execute('''UPDATE count_data SET phrase_count = ?
