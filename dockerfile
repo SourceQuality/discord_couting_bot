@@ -1,5 +1,6 @@
 FROM python:3
 ADD requirements.txt /
-run pip3 install -r requirements.txt
-add counter_bot.py /
+RUN pip3 install -r requirements.txt
+RUN mkdir /data
+ADD counter_bot.py /data
 CMD ["python", "./counter_bot.py"]

@@ -8,13 +8,14 @@ channel_name = os.environ("CHANNEL_NAME")
 tracked_phrases = os.environ("PHRASE")
 discord_api_token = os.environ("DISCORD_TOKEN")
 
+
 #discord intents
 intents = discord.Intents.default()
 intents.message_content = True
 intents.messages = True
 
 #Creat the sqlite3 database
-conn = sqlite3.connect('count_data.db')
+conn = sqlite3.connect('/data/count_data.db')
 c = conn.cursor()
 c.execute('''CREATE TABLE IF NOT EXISTS count_data
              (server_id text, channel text, name text, phrase_name text, phrase_count integer)''')
@@ -50,7 +51,7 @@ async def on_message(message):
 
     if channel == channel_name:
         if phrase_name is not None:
-            conn = sqlite3.connect('count_data.db')
+            conn = sqlite3.connect('/data/count_data.db')
             c = conn.cursor()
             server_id = str(message.guild.id)
             channel = str(message.channel.id)
