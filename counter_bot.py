@@ -14,7 +14,7 @@ intents.message_content = True
 intents.messages = True
 
 #Creat the sqlite3 database
-conn = sqlite3.connect('count_data.db')
+conn = sqlite3.connect('/data/count_data.db')
 c = conn.cursor()
 c.execute('''CREATE TABLE IF NOT EXISTS count_data
              (server_id text, channel text, name text, phrase_name text, phrase_count integer)''')
@@ -47,22 +47,22 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-
     if channel == channel_name:
         if phrase_name is not None:
-            conn = sqlite3.connect('count_data.db')
+            conn = sqlite3.connect('/data/count_data.db')
             c = conn.cursor()
             server_id = str(message.guild.id)
             channel = str(message.channel.id)
-            name = phrase_name.split(' ', 1)[1]
-            capital_name = string.capwords(name)
-            c.execute('''SELECT phrase_count FROM count_data
+            if phrase_name.startswith("fuck ") and len(phrase_name.split()) > 1:
+                name = phrase_name.split(' ', 1)[1]
+                capital_name = string.capwords(name)
+                c.execute('''SELECT phrase_count FROM count_data
                           WHERE server_id = ? AND phrase_name = ? AND name = ?''', (server_id, phrase_name, name))
             result = c.fetchone()
             if result is None:
-                phrase_count = 1
-                c.execute('''INSERT INTO count_data (server_id, phrase_name, name, phrase_count)
-                              VALUES (?, ?, ?, ?)''', (server_id, phrase_name, name, phrase_count))
+                    phrase_count = 1
+                    c.execute('''INSERT INTO count_data (server_id, phrase_name, name, phrase_count)
+                            VALUES (?, ?, ?, ?)''', (server_id, phrase_name, name, phrase_count))
             else:
                 phrase_count = result[0] + 1
                 c.execute('''UPDATE count_data SET phrase_count = ?
