@@ -39,17 +39,15 @@ async def on_message(message):
     phrase_name = None
 
     print(f' {username} said "{user_message}" in {channel}')
-
+    if message.author == client.user:
+        return
     for phrase in tracked_phrases:
         if phrase in user_message.lower():
             phrase_name = phrase
             break
-  
-    if message.author == client.user:
-        return
 
-    if channel == channel_name:
-        if phrase_name is not None:
+        if channel == channel_name:
+         if phrase_name is not None:
             conn = sqlite3.connect('/data/count_data.db')
             c = conn.cursor()
             server_id = str(message.guild.id)
