@@ -4,9 +4,9 @@ import sqlite3
 import string
 
 #Env variables
-channel_name = os.environ('CHANNEL_NAME')
-tracked_phrases = os.environ('PHRASE')
-discord_api_token = os.environ('DISCORD_TOKEN')
+channel_name = os.environ.get('CHANNEL_NAME')
+tracked_phrases = os.environ.get('PHRASE')
+discord_api_token = os.environ.get('DISCORD_TOKEN')
 
 #discord intents
 intents = discord.Intents.default()
