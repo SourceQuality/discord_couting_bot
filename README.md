@@ -15,4 +15,8 @@ discordcoutingbot:latest
 ```
 
 Docker compose:
-TBD
+
+```
+discordcounter:
+    image: 
+```
