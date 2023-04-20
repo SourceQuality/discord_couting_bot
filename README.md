@@ -18,6 +18,12 @@ ghcr.io/sourcequality/discord_couting_bot:latest
 Docker compose:
 
 ```
-discordcounter:
-    image: 
+  discordcounter:
+    image: ghcr.io/sourcequality/discord_couting_bot:main
+    volumes:
+      - discordcounter:/config
+    environment:
+      - DISCORD_TOKEN=Your discord bot token
+      - PHRASE=comma, seperated, list
+    restart: unless-stopped
 ```
