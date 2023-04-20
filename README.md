@@ -12,7 +12,7 @@ docker run -d \
     -e DISCORD_TOKEN= "Your discord bot token" \
     -e PHRASE="comma, seperated, list" \
     -v /path/to/config:config \
-ghcr.io/sourcequality/discord_couting_bot:main
+ghcr.io/sourcequality/discord_couting_bot:latest
 ```
 
 Docker compose:
