@@ -19,7 +19,7 @@ Docker compose:
 
 ```
   discordcounter:
-    image: ghcr.io/sourcequality/discord_couting_bot:main
+    image: ghcr.io/sourcequality/discord_couting_bot:latest
     volumes:
       - discordcounter:/config
     environment:
