@@ -8,7 +8,7 @@ tracked_phrases_str = os.environ.get("PHRASE")
 tracked_phrases = tracked_phrases_str.split(",")
 discord_api_token = os.environ["DISCORD_TOKEN"]
 db_location = "/config/count_data.db"
-bot_response = os.environ["RESPONSE"]
+bot_response_template = os.environ["RESPONSE"]
 
 
 #discord intents
@@ -79,6 +79,8 @@ async def on_message(message):
                           WHERE server_id = ? AND phrase_name = ?''', (phrase_count, server_id, phrase_name))
         conn.commit()
         conn.close()
+        #Format the varaible so the bot sends the actual variables and not just the string.
+        bot_response = bot_response_template.format(username=username, capital_name=capital_name, phrase_count=phrase_count)
         #Send message into discord channel
         await message.channel.send(bot_response)
     return
