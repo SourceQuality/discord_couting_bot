@@ -8,6 +8,7 @@ tracked_phrases_str = os.environ.get("PHRASE")
 tracked_phrases = tracked_phrases_str.split(",")
 discord_api_token = os.environ["DISCORD_TOKEN"]
 db_location = "/config/count_data.db"
+bot_response = os.environ("RESPONSE")
 
 
 #discord intents
@@ -79,7 +80,7 @@ async def on_message(message):
         conn.commit()
         conn.close()
         #Send message into discord channel
-        await message.channel.send(f"{username} just fucked {capital_name}! {capital_name} has been fucked {phrase_count} times.")
+        await message.channel.send(bot_response)
     return
 
 
