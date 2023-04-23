@@ -9,9 +9,9 @@ Docker run command:
 
 ```
 docker run -d \
-    -e DISCORD_TOKEN= "Your discord bot token" \
+    -e DISCORD_TOKEN="Your discord bot token" \
     -e PHRASE="comma, seperated, list" \
-    -e RESPONSE="{username} just said something to {capital_name}. They have said this {phrase_count} times.
+    -e RESPONSE="{username} just said something to {capital_name}. They have said this {phrase_count} times." \
     -v /path/to/config:config \
 ghcr.io/sourcequality/discord_couting_bot:latest
 ```
@@ -26,5 +26,6 @@ Docker compose:
     environment:
       - DISCORD_TOKEN=Your discord bot token
       - PHRASE=comma, seperated, list
+      - RESPONSE={username} just said something to {capital_name}. They have said this {phrase_count} times.
     restart: unless-stopped
 ```
