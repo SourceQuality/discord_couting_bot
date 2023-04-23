@@ -8,7 +8,7 @@ tracked_phrases_str = os.environ.get("PHRASE")
 tracked_phrases = tracked_phrases_str.split(",")
 discord_api_token = os.environ["DISCORD_TOKEN"]
 db_location = "/config/count_data.db"
-bot_response = os.environ("RESPONSE")
+bot_response = os.environp["RESPONSE"]
 
 
 #discord intents
