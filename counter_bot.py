@@ -36,7 +36,7 @@ async def on_ready():
 #listen for messages
 @client.event
 async def on_message(message):
-    username = str(message.nick).split("#")[0]
+    username = str(message.author.nick).split("#")[0]
     channel = str(message.channel.name)
     user_message = str(message.content)
     phrase_name = None
