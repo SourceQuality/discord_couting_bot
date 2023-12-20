@@ -36,7 +36,7 @@ async def on_ready():
 #listen for messages
 @client.event
 async def on_message(message):
-    username = str(message.author).split("#")[0]
+    username = str(message.nick).split("#")[0]
     channel = str(message.channel.name)
     user_message = str(message.content)
     phrase_name = None
@@ -79,7 +79,7 @@ async def on_message(message):
                           WHERE server_id = ? AND phrase_name = ?''', (phrase_count, server_id, phrase_name))
         conn.commit()
         conn.close()
-        #Format the varaible so the bot sends the actual variables and not just the string.
+        #Format the variable so the bot sends the actual variables and not just the string.
         bot_response = bot_response_template.format(username=username, capital_name=capital_name, phrase_count=phrase_count)
         #Send message into discord channel
         await message.channel.send(bot_response)
