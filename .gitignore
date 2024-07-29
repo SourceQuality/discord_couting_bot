@@ -152,3 +152,4 @@ cython_debug/
 #.idea/
 stuff.env
 *.db
+compose.yaml
