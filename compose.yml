@@ -1,0 +1,15 @@
+---
+version: "3.8"
+services:
+  discordcounter:
+    image: discordcoutingbot:latest
+    volumes:
+      - discordcounter:/config
+    environment:
+      DISCORD_TOKEN: MTI2NzI2NzYyMjc3NzUyNDM1OQ.GCDJ-u.PPdpY21gHUG-QOsYAZM1Lmlwx1LFD_ppp90n2g
+      PHRASE: "fuck"  # Comma-separated tracked phrases
+      RESPONSE_MAPPINGS: '{"fuck": "{username} just fucked {capital_name}! {capital_name} has been fucked {phrase_count} times."}'  # JSON string for responses
+      ALIASES: '{"Dan": ["danny", "daniel"], "ryan": ["ryguy", "ryfi"], "the bot":["The bot","bot"] }'  # JSON string for name aliases
+    restart: unless-stopped
+volumes:
+  discordcounter:
