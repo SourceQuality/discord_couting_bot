@@ -153,3 +153,4 @@ cython_debug/
 stuff.env
 *.db
 compose.yaml
+.compose.yml
